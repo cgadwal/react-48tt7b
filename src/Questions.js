@@ -1,4 +1,5 @@
 import React from 'react';
+import { BallResizer } from "./Slider";
 
 export class Questions extends React.Component {
   render() {
@@ -24,7 +25,12 @@ export class Questions extends React.Component {
 
             <input type="radio" id={question[4]} name={question[0]} value={question[4]} />
             <label for={question[4]}>{question[4]} </label>
-            <br />
+            <br /><br />
+            Level of certainity: 
+            <div className="ballSlider">
+              <BallResizer name={question[0]} initialSize={150} minSize={150} maxSize={250} />
+            </div>
+  
        </div>   
        
       );

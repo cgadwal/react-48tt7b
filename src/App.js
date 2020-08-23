@@ -2,7 +2,6 @@ import React from "react";
 import "./style.css";
 import { Questions } from './Questions';
 
-import { MyComponent } from './Slider';
 
 export default function App() {
   
