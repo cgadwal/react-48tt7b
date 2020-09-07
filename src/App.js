@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import { Questions } from './Questions';
+import { Parent } from './Parent';
 
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
     <div>
       <h1>HP Trivia!</h1>
       
-      <Questions />
+      <Parent />
     </div>
   );
 }

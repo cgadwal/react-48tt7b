@@ -9,21 +9,24 @@ export class Questions extends React.Component {
     // This binding is necessary to make `this` work in the callback
     this.nextButtonClick = this.nextButtonClick.bind(this);
     this.prevButtonClick = this.prevButtonClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   nextButtonClick() {
-    this.setState((state) => {
-      return {pageNumb: state.pageNumb + 1}
-    });
+    this.setState({pageNumb: this.state.pageNumb + 1});
 
   }
   
   prevButtonClick() {
-    this.setState((state) => {
-      return {pageNumb: state.pageNumb - 1}
-    });
+    this.setState({pageNumb: this.state.pageNumb - 1});
   }
 
+  handleChange(e) {
+    const name = e.target.value;
+    //const number = e.target.name; 
+    //const certainity = ; 
+    this.props.onChange(name);
+  }
 
   submit() {
     //to do: implement
@@ -31,12 +34,12 @@ export class Questions extends React.Component {
 
   render() {
     let allquestions = [
-    {questionTitle: 'Who was the headmaster of Hogwarts when the Chamber of Secrets was opened for the first time?', answer1: 'Armando Dippet', answer2: 'Albus Dumbledore', answer3: 'Phineas Nigellus Black', answer4: 'Brutus Scrimgeour'},
-    {questionTitle: 'Which creatures pull the carriages that take students from the Hogwarts Express to the Castle?', answer1: 'Hippogriffs', answer2: 'Thestrals', answer3: 'Centaurs', answer4: 'Manticores'},
-    {questionTitle: 'How many staircases does Hogwarts have?', answer1: '142', answer2: '143', answer3: '152', answer4: '163'},
-    {questionTitle: 'What is the name of the room Harry uses to teach Dumpledore\'s Army?', answer1: 'The Restricted Section of the Library', answer2: 'The Girls Bathroom on the First Floor', answer3: 'The Perfect\'s Bathroom', answer4: 'The Room of Requirement'}, 
-    {questionTitle: 'What is the name of the book Hermione supposes Voldemore used to learn about Horcruxes?', answer1: 'Magik Moste Evil', answer2: 'Secrets of the Darkest Art', answer3: 'A guide to Medieval Socery', answer4: 'Moste Potente Potions'}, 
-    {questionTitle: 'Slughorn teaches his students that Amortentia smells different to each person. What food does Harry smell?', answer1: 'Pumpkin juice', answer2: 'Mrs. Weasley\'s Fudge', answer3: 'Lemon Drops', answer4: 'Treacle Tart'}
+    {number: 1, questionTitle: 'Who was the headmaster of Hogwarts when the Chamber of Secrets was opened for the first time?', answer1: 'Armando Dippet', answer2: 'Albus Dumbledore', answer3: 'Phineas Nigellus Black', answer4: 'Brutus Scrimgeour'},
+    {number: 2, questionTitle: 'Which creatures pull the carriages that take students from the Hogwarts Express to the Castle?', answer1: 'Hippogriffs', answer2: 'Thestrals', answer3: 'Centaurs', answer4: 'Manticores'},
+    {number: 3, questionTitle: 'How many staircases does Hogwarts have?', answer1: '142', answer2: '143', answer3: '152', answer4: '163'},
+    {number: 4, questionTitle: 'What is the name of the room Harry uses to teach Dumpledore\'s Army?', answer1: 'The Restricted Section of the Library', answer2: 'The Girls Bathroom on the First Floor', answer3: 'The Perfect\'s Bathroom', answer4: 'The Room of Requirement'}, 
+    {number: 5, questionTitle: 'What is the name of the book Hermione supposes Voldemore used to learn about Horcruxes?', answer1: 'Magik Moste Evil', answer2: 'Secrets of the Darkest Art', answer3: 'A guide to Medieval Socery', answer4: 'Moste Potente Potions'}, 
+    {number: 6, questionTitle: 'Slughorn teaches his students that Amortentia smells different to each person. What food does Harry smell?', answer1: 'Pumpkin juice', answer2: 'Mrs. Weasley\'s Fudge', answer3: 'Lemon Drops', answer4: 'Treacle Tart'}
     ]; 
   
   const questions = allquestions.map(question => {
@@ -46,25 +49,25 @@ export class Questions extends React.Component {
               {question.questionTitle}
             </div>
             <div>
-            <input type="radio" id={question.answer1} name={question.questionTitle} value={question.answer1} />
+            <input type="radio" id={question.answer1} name={question.number} value={question.answer1} onClick={this.handleChange}/>
             <label htmlFor={question.answer1}>{question.answer1} </label>
             <br />
             
-            <input type="radio" id={question.answer2} name={question.questionTitle} value={question.answer2} />
+            <input type="radio" id={question.answer2} name={question.number} value={question.answer2} onClick={this.handleChange}/>
             <label htmlFor={question.answer2}>{question.answer2} </label>
             <br />
 
-            <input type="radio" id={question.answer3} name={question.questionTitle} value={question.answer3} />
+            <input type="radio" id={question.answer3} name={question.number} value={question.answer3} onClick={this.handleChange}/>
             <label htmlFor={question.answer3}>{question.answer3} </label>
             <br />
 
-            <input type="radio" id={question.answer4} name={question.questionTitle} value={question.answer4} />
+            <input type="radio" id={question.answer4} name={question.number} value={question.answer4} onClick={this.handleChange}/>
             <label htmlFor={question.answer4}>{question.answer4} </label>
             </div>
             <br /><br />
             Level of certainity: 
             <div className="ballSlider">
-              <BallResizer name={question.questionTitle} initialSize={150} minSize={150} maxSize={250} />
+              <BallResizer name={question.number} initialSize={150} minSize={150} maxSize={250} onClick={this.handleChange}/>
             </div>
        </div>   
        
