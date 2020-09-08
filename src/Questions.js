@@ -22,10 +22,26 @@ export class Questions extends React.Component {
   }
 
   handleChange(e) {
-    const name = e.target.value;
-    //const number = e.target.name; 
-    //const certainity = ; 
-    this.props.onChange(name);
+    const number = e.target.name; 
+    const name = Number(e.target.value);
+    if (typeof name === 'string' || name instanceof String || isNaN(name)) {
+        const answer = e.target.value;
+        this.props.onChangeName(number, answer);
+    }
+    else {
+      const certainity = e.target.value - 150;
+      this.props.onChangeName(number, certainity);
+    }
+  
+  }
+
+  handleChangeForCertainity(e) {
+    const certainity = e.target.value - 150;
+    const number = e.target.name; 
+
+    console.log('certainity ' + certainity); 
+    console.log('number ' + number); 
+    this.props.onChangeName(number, null, certainity);
   }
 
   submit() {
@@ -33,6 +49,7 @@ export class Questions extends React.Component {
   }
 
   render() {
+    
     let allquestions = [
     {number: 1, questionTitle: 'Who was the headmaster of Hogwarts when the Chamber of Secrets was opened for the first time?', answer1: 'Armando Dippet', answer2: 'Albus Dumbledore', answer3: 'Phineas Nigellus Black', answer4: 'Brutus Scrimgeour'},
     {number: 2, questionTitle: 'Which creatures pull the carriages that take students from the Hogwarts Express to the Castle?', answer1: 'Hippogriffs', answer2: 'Thestrals', answer3: 'Centaurs', answer4: 'Manticores'},
@@ -41,7 +58,7 @@ export class Questions extends React.Component {
     {number: 5, questionTitle: 'What is the name of the book Hermione supposes Voldemore used to learn about Horcruxes?', answer1: 'Magik Moste Evil', answer2: 'Secrets of the Darkest Art', answer3: 'A guide to Medieval Socery', answer4: 'Moste Potente Potions'}, 
     {number: 6, questionTitle: 'Slughorn teaches his students that Amortentia smells different to each person. What food does Harry smell?', answer1: 'Pumpkin juice', answer2: 'Mrs. Weasley\'s Fudge', answer3: 'Lemon Drops', answer4: 'Treacle Tart'}
     ]; 
-  
+
   const questions = allquestions.map(question => {
       return (
         <div>
@@ -66,8 +83,9 @@ export class Questions extends React.Component {
             </div>
             <br /><br />
             Level of certainity: 
-            <div className="ballSlider">
-              <BallResizer name={question.number} initialSize={150} minSize={150} maxSize={250} onClick={this.handleChange}/>
+            <div className="ballSlider" onChange={this.handleChange} >
+              <BallResizer initialSize={150} minSize={150} maxSize={250} questNumb={question.number} />
+              
             </div>
        </div>   
        
@@ -90,13 +108,13 @@ export class Questions extends React.Component {
   }
   
   prevButton() {
-      return (<button class="previous round" onClick={this.prevButtonClick}>
+      return (<button className="previous round" onClick={this.prevButtonClick}>
         &#8249;
       </button>); 
 
   }
   nextButton() {
-      return (<button class="next round" onClick={this.nextButtonClick} >
+      return (<button className="next round" onClick={this.nextButtonClick} >
         &#8250;
       </button>); 
   }

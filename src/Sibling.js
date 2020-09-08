@@ -5,11 +5,12 @@ export class Sibling extends React.Component {
 
   render() {
     const name = this.props.name;
-    const number = 1; 
-    const certainity = 0; 
+    const number = this.props.number; 
+    const certainity = this.props.certainity; 
+
     return (<div>
-        <p>Current answer selected: {name}</p>
-       {/*<p>{number} - {name} with {certainity}%</p>*/}
+       
+        <p>Selected answer: {number} - {name} with {certainity}%</p>
     
     </div>);
 

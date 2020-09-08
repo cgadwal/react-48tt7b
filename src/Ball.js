@@ -1,11 +1,12 @@
 import React from "react";
 
 const Ball = ({ size }) => {
+  //console.log(question_number); 
   return (
     <>
       <div className="ball">
         <br />
-        {size - 150}%
+        {size - 150}% 
       </div>
     </>
   );
@@ -13,9 +14,3 @@ const Ball = ({ size }) => {
 
 export { Ball };
 
-/*<div
-        className="ball"
-        style={{
-          "--size": size
-        }}
-      />*/
